@@ -1,0 +1,16 @@
+package com.wxy.realm;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan({"com.wxy.realm.mapper"})
+public class RealmApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RealmApplication.class, args);
+    }
+
+}
+
