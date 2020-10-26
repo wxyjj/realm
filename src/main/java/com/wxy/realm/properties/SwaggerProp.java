@@ -31,11 +31,6 @@ public class SwaggerProp {
      */
     private String applicationDescription;
 
-    /**
-     * 接口调试地址
-     */
-    private String tryHost;
-
     public Boolean getEnable() {
         return enable;
     }
@@ -66,13 +61,5 @@ public class SwaggerProp {
 
     public void setApplicationDescription(String applicationDescription) {
         this.applicationDescription = applicationDescription;
-    }
-
-    public String getTryHost() {
-        return tryHost;
-    }
-
-    public void setTryHost(String tryHost) {
-        this.tryHost = tryHost;
     }
 }

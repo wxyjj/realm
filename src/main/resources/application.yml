@@ -33,7 +33,6 @@ swagger:
   application-name: ${spring.application.name}
   application-version: 1.0
   application-description: springfox swagger 3.0
-  try-host: http://localhost:${server.port}
 
 logging:
   config: classpath:logback-spring.xml
