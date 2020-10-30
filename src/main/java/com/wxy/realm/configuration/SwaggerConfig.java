@@ -49,7 +49,7 @@ public class SwaggerConfig {
                 .host("/")
                 // 选择哪些接口作为swagger的doc发布
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.wxy.realm"))
                 .paths(PathSelectors.any())
                 .build()
                 // 支持的通讯协议集合

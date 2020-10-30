@@ -2,14 +2,10 @@ package com.wxy.realm.configuration;
 
 import com.wxy.realm.support.WorkThreadFactory;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -18,8 +14,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -59,26 +53,14 @@ public class BasicConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 通用拦截器排除swagger设置，所有拦截器都会自动加swagger相关的资源排除信息
+     * 注册拦截器
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        try {
-            Field registrationsField = FieldUtils.getField(InterceptorRegistry.class, "registrations", true);
-            List<InterceptorRegistration> registrations = (List<InterceptorRegistration>) ReflectionUtils.getField(registrationsField, registry);
-            if (registrations != null) {
-                for (InterceptorRegistration interceptorRegistration : registrations) {
-                    interceptorRegistration
-                            .excludePathPatterns("/swagger**/**")
-                            .excludePathPatterns("/webjars/**")
-                            .excludePathPatterns("/v3/**")
-                            .excludePathPatterns("/doc.html");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //注册拦截器BasicInterceptor
+        InterceptorRegistration registration = registry.addInterceptor(new BasicInterceptor());
+        //排除swagger资源
+        registration.excludePathPatterns("/swagger**/**", "/webjars/**", "/doc.html", "/favicon.ico", "/error");
     }
 
     /**
