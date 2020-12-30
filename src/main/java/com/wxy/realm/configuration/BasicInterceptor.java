@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 public class BasicInterceptor extends HandlerInterceptorAdapter {
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         return super.preHandle(request, response, handler);
     }
 

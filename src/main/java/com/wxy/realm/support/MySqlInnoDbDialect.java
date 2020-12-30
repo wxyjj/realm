@@ -20,6 +20,6 @@ public class MySqlInnoDbDialect extends MySQLDialect {
 
     @Override
     public String getTableTypeString() {
-        return " engine=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin";
+        return " engine=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
     }
 }

@@ -4,35 +4,8 @@ server:
 spring:
   application:
     name: realm
-  datasource:
-    platform: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://111.229.140.117:3306/wxy?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false&allowMultiQueries=true
-    username: wxy
-    password:
-    hikari:
-      connection-test-query: 'select 1 from dual'
-      connection-timeout: 100000
-      validation-timeout: 100000
-    type: com.zaxxer.hikari.HikariDataSource
-  jpa:
-    database: ${spring.datasource.platform}
-    show-sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-      use-new-id-generator-mappings: true
-    database-platform: com.wxy.realm.support.MySqlInnoDbDialect
-    open-in-view: true
-    properties:
-      hibernate:
-        enable_lazy_load_no_trans: true
-
-swagger:
-  enable: true
-  application-name: ${spring.application.name}
-  application-version: 1.0
-  application-description: springfox swagger 3.0
+  profiles:
+    active: dev
 
 logging:
   config: classpath:logback-spring.xml
@@ -41,4 +14,3 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.ym.im.entity

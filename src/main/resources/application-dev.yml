@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.194:3306/rtdl?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    hikari:
+      connection-test-query: 'select 1 from dual'
+      connection-timeout: 100000
+      validation-timeout: 100000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    database: ${spring.datasource.platform}
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    database-platform: com.wxy.realm.support.MySqlInnoDbDialect
+    open-in-view: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  redis:
+    database: 0
+    host: 192.168.1.200
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 50
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1ms
+    timeout: 3000ms
+    password: 123456
+  data:
+    redis:
+      repositories:
+        enabled: false
+
